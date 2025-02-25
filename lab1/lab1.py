@@ -29,3 +29,17 @@ template1 = "{} is a nice color."
 print(template1.format("Green"))
 
 print(f"Pi is aproximately {f}.")
+
+# SARCINA 2
+# a)
+# print(substr) va afișa " results" deoarece rezultatul dat intră în intervalul 4:12
+# print(substr.strip()) va afișa "results" deoarece funcția strip înlătură spațiile din string
+#
+# b)
+# print(txt.split()) va afișa un tablou unidimensional, unde fiecare cuvânt va fi un element al acestui tablou: [More, results, from, text...]
+#
+# c)
+# print(txt.format(age)) va afișa "My name is Mary, and I am 36". 
+# Se apelează la funcția tipului de date string format(), care ia ca parametru o variabilă de tip int, care va fi afișată în acoladele din variabila txt.
+
+
