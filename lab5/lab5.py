@@ -44,3 +44,25 @@
 # print(f"Caracterul \"{valueToFind}\" a fost găsit de {c} ori.")
 
 
+import functions as f
+
+shopping_list = []
+
+while True:
+    print("\nAlegeți o opțiune: 1 - Afișare listă 2 - Adăugare produs 3 - Ștergere produs 4 - Ieșire")
+    userInput = input()
+    if userInput == "1":
+        f.print_list(shopping_list)
+    elif userInput == "2":
+        f.add_product(shopping_list)
+    elif userInput == "3":
+        f.delete_product(shopping_list)
+    elif userInput == "4":
+        break
+    else:
+        print("Eroare!")           
+                 
+
+
+
+
