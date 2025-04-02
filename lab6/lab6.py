@@ -1,96 +1,55 @@
+﻿import Lab6Classes
+import re
 
-class HourlyEmployee:
-    def __init__(self):
-        self.__nmbrOfHour
-        self.__hourlyPay
-    
-     # GETTERS
-    def get_nmbrOfHour(self):
-        return self.__nmbrOfHour
-    
-    def get_hourlyPay(self):
-        return self.__hourlyPay
+def validate_input(pattern, prompt):
+    while True:
+        value = input(prompt)
+        if re.fullmatch(pattern, value):
+            return value
+        print("Input invalid! Reîncercați.")
 
-     # SETTERS
-    def set_nmbrOfHour(self, nmbrOfHour):
-        self.__nmbrOfHour = nmbrOfHour
+employees = []
+for _ in range(2):
+    employee = Lab6Classes.Employee()
+    employee.nameEmployee = validate_input(r"^[A-Za-z]+$", "Introduceți numele angajatului: ")
+    employee.phone = validate_input(r"^\+373\d{8}$", "Introduceți telefonul (+373xxxxxxxx): ")
+    employee.bday = validate_input(r"^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19[6-9]\d|200[0-7])$", "Introduceți data nașterii (zz.ll.aaaa): ")
+    employee.email = validate_input(r"^[A-Za-z0-9._|-]{2,20}@[A-Za-z]{4,7}\.[A-Za-z]{2,4}$", "Introduceți e-mail-ul: ")
+    employee.position = validate_input(r"^[A-Za-z]{4,20}$", "Introduceți specialitatea: ")
+    employees.append(employee)
 
-    def set_hourlyPay(self, hourlyPay):
-        self.__hourlyPay = hourlyPay
+hourly_employees = []
+for _ in range(2):
+    employee = Lab6Classes.HourlyEmployee()
+    employee.nmbrOfHour = int(validate_input(r"^\d+$", "Introduceți numărul de ore: "))
+    employee.hourlyPay = float(validate_input(r"^\d+(\.\d+)?$", "Introduceți plata pe oră: "))
+    hourly_employees.append(employee)
 
-    # PROPERTIES
-    nmbrOfHour = property(get_nmbrOfHour, set_nmbrOfHour)
-    hourlyPay = property(get_hourlyPay, set_hourlyPay)
+salary_employees = []
+for _ in range(2):
+    employee = Lab6Classes.SalaryEmployee()
+    employee.salary = float(validate_input(r"^\d+(\.\d+)?$", "Introduceți salariul lunar: "))
+    salary_employees.append(employee)
 
-class SalaryEmployee:
-    def __init__(self):
-        self.__salary
+print("\nDetalii angajați:")
+for emp in employees:
+    print(f"Nume: {emp.nameEmployee}")
+    print(f"Telefon: {emp.phone}")
+    print(f"Data nașterii: {emp.bday}")
+    print(f"E-mail: {emp.email}")
+    print(f"Specialitate: {emp.position}\n")
 
-     # GETTERS
-    def get_salary(self):
-        return self.__salary
+print("\nDetalii angajați cu plată orară:")
+for emp in hourly_employees:
+    print(f"Număr de ore: {emp.nmbrOfHour}")
+    print(f"Plată pe oră: {emp.hourlyPay}\n")
 
-    # SETTERS
-    def set_salary(self, salary):
-        self.__salary = salary
+print("\nDetalii angajați cu salariu fix:")
+for emp in salary_employees:
+    print(f"Salariu lunar: {emp.salary}\n")
 
-    # PROPERTIES
-    salary = property(get_salary, set_salary)
-    
+hourly_salaries = [emp.calculateSalary() for emp in hourly_employees]
+salary_salaries = [emp.calculateSalary() for emp in salary_employees]
 
-class Employee(HourlyEmployee, SalaryEmployee):
-    def __init__(self):
-        self.__nameEmployee
-        self.__phone
-        self.__bday
-        self.__email
-        self.__position
-    
-    # GETTERS
-    def get_nameEmployee(self):
-        return self.__nameEmployee
-    
-    def get_phone(self):
-        return self.__phone
-    
-    def get_bday(self):
-        return self.__bday
-    
-    def get_email(self):
-        return self.__email
-    
-    def get_position(self):
-        return self.__position
-
-    # SETTERS
-    def set_nameEmployee(self, nameEmployee):
-        self.__nameEmployee = nameEmployee
-
-    def set_phone(self, phone):
-        self.__phone = phone
-
-    def set_bday(self, bday):
-        self.__bday = bday
-        
-    def set_email(self, email):
-        self.__email = email
-        
-    def set_position(self, position):
-        self.__position= position
-
-
-    # PROPERTIES
-    nameEmployee = property(get_nameEmployee, set_nameEmployee)
-    phone = property(get_phone, set_phone)
-    bday = property(get_bday, set_bday)
-    email = property(get_email, set_email)
-    position = property(get_position, set_position)
-
-
-    # RESTUL
-    def calculateAge():
-        pass
-    
-    def _calculareSalary():
-        pass
-    
+print("\nSalarii angajați cu plată orară:", hourly_salaries)
+print("Salarii angajați cu salariu fix:", salary_salaries)
